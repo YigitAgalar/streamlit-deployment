@@ -6,14 +6,15 @@ from sklearn.feature_extraction import DictVectorizer
 from sklearn.linear_model import LogisticRegression
 from wordcloud import WordCloud
 
-
 topic_data = pd.read_pickle('sentiment_profile.pkl')
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.sidebar.title('Şubeler')
 
+il = st.sidebar.selectbox("Hangi ili görüntülemek istediğnizi seçiniz", topic_data['il'].unique())
+
 sube = st.sidebar.selectbox(
-    "İncelemek istediğiniz şubenin adresini seçiniz", topic_data['place_address'].unique())
+    "İncelemek istediğiniz şubenin adresini seçiniz", topic_data[topic_data["il"]==il]['place_address'].unique())
 
 
 st.title('Şube Profili')
